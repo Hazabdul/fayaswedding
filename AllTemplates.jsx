@@ -4593,4 +4593,4 @@ export {
   KeralaWeddingTemplate as ModernTemplate,
   KeralaWeddingTemplate as ArabicTemplate,
   KeralaWeddingTemplate as TraditionalTemplate,
-}; 
+};   
