@@ -650,6 +650,7 @@ button {
   font-size: clamp(22px, 4vw, 31px);
   line-height: 1.1;
   font-weight: 400;
+  color: #ffffff !important;
 }
 
 .hero-mini-names .amp {
@@ -2081,6 +2082,11 @@ button.modern-collage-card {
   font-size: 12px;
 }
 
+.studio-link:hover {
+  color: #fff !important;
+  border-bottom-color: #fff !important;
+}
+
 .lightbox-modal {
   position: fixed;
   inset: 0;
@@ -2546,6 +2552,7 @@ const TRANSLATIONS = {
     footerCopyright: "© 2026 Fayas & Keerthi. Together Forever.",
     callGroom: "Call Groom",
     exploreBtn: "Explore Wedding",
+    saveToCalendar: "Save to Calendar",
     happyCoupleTitle: "The Happy Couple",
     happyCoupleSubtitle:
       "With hearts full of love, we introduce the bride and the groom as they begin this beautiful lifetime journey together.",
@@ -2629,6 +2636,7 @@ const TRANSLATIONS = {
     footerCopyright: "© 2026 ഫയാസ് & കീർത്തി. എന്നും ഒന്നായി.",
     callGroom: "വരനെ വിളിക്കുക",
     exploreBtn: "വിവാഹവിവരങ്ങൾ",
+    saveToCalendar: "കലണ്ടറിൽ ചേർക്കുക",
     happyCoupleTitle: "വധൂവരന്മാർ",
     happyCoupleSubtitle:
       "സ്നേഹനിർഭരമായ ഹൃദയത്തോടെ, ഞങ്ങൾ വധൂവരന്മാരെ പരിചയപ്പെടുത്തുന്നു.",
@@ -2725,19 +2733,12 @@ export default function KeralaWeddingTemplate() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [galleryStep, setGalleryStep] = useState(0);
-  const [blessings, setBlessings] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    relation: "",
-    message: "",
-  });
   const [rsvpData, setRsvpData] = useState({
     name: "",
     guests: "1",
     attendance: "attending",
     message: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isRsvpSubmitted, setIsRsvpSubmitted] = useState(false);
   const [countdown, setCountdown] = useState({
     days: 0,
@@ -2748,6 +2749,37 @@ export default function KeralaWeddingTemplate() {
 
   const t = TRANSLATIONS[lang];
   const art = ART_QUOTES[lang];
+
+  const handleSaveToCalendar = () => {
+    const title = "Wedding | Muhammad Fayas & Keerthi Anilkumar";
+    const description = "Join us for our wedding ceremony and celebratory feast at Serene Lake Resort, Kappil.";
+    const location = "Serene Lake Resort, Kappil Rd, Kappil, Edava, Kerala 695311, India";
+    
+    const startStr = "20260913T050000Z";
+    const endStr = "20260913T100000Z";
+    
+    const icsContent = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Trired Global//Wedding Invitation//EN",
+      "BEGIN:VEVENT",
+      `SUMMARY:${title}`,
+      `DESCRIPTION:${description}`,
+      `LOCATION:${location}`,
+      `DTSTART:${startStr}`,
+      `DTEND:${endStr}`,
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n");
+
+    const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "Fayas_Keerthi_Wedding.ics";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const galleryImages = useMemo(
     () =>
@@ -2859,45 +2891,7 @@ export default function KeralaWeddingTemplate() {
     return () => window.clearInterval(interval);
   }, [galleryImages.length]);
 
-  useEffect(() => {
-    const savedBlessings = localStorage.getItem("wedding_blessings");
 
-    if (savedBlessings) {
-      try {
-        setBlessings(JSON.parse(savedBlessings));
-      } catch {
-        localStorage.removeItem("wedding_blessings");
-      }
-      return;
-    }
-
-    const defaultBlessings = [
-      {
-        name: "Prasad & Mini",
-        relation: "Family Friend",
-        message:
-          "Congratulations Fayas and Keerthi. Wishing you both a lifetime of love, happiness, and beautiful memories. May God bless your union.",
-        date: "09/06/2026",
-      },
-      {
-        name: "Anjali Krishna",
-        relation: "Bride's Colleague",
-        message:
-          "So happy for you Keerthi. Wishing you and Fayas all the blessings in the world. Excited for the big day at the resort.",
-        date: "09/06/2026",
-      },
-      {
-        name: "Siddharth Nair",
-        relation: "Groom's Friend",
-        message:
-          "Big congratulations to Fayas and Keerthi. Wishing you a beautiful wedding day and a joyful life together.",
-        date: "09/06/2026",
-      },
-    ];
-
-    localStorage.setItem("wedding_blessings", JSON.stringify(defaultBlessings));
-    setBlessings(defaultBlessings);
-  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -3016,7 +3010,7 @@ export default function KeralaWeddingTemplate() {
 
       if (reduceMotion) {
         gsap.set(
-          ".cinematic-intro, .intro-veil, .intro-mark, .hero-bg, .hero-panel, .hero-date-panel, .hero-content-panel, .hero-art-frame, .hero-monogram, .hero-light-beam, .reveal, .line-reveal, .timeline-item, .modern-collage-card, .rsvp-card, .rsvp-summary, .map-card, .map-details, .blessing-form, .blessing-board, .footer-names, .footer-quote, .footer-address, .footer-copy, .art-editorial-card, .art-editorial-image, .art-editorial-copy, .art-signature, .quote-card, .luxury-divider",
+          ".cinematic-intro, .intro-veil, .intro-mark, .hero-bg, .hero-panel, .hero-date-panel, .hero-content-panel, .hero-art-frame, .hero-monogram, .hero-light-beam, .reveal, .line-reveal, .timeline-item, .modern-collage-card, .rsvp-card, .rsvp-summary, .map-card, .map-details, .footer-names, .footer-quote, .footer-address, .footer-copy, .art-editorial-card, .art-editorial-image, .art-editorial-copy, .art-signature, .quote-card, .luxury-divider",
           {
             clearProps: "all",
             opacity: 1,
@@ -3270,7 +3264,7 @@ export default function KeralaWeddingTemplate() {
 
       appear({
         selector:
-          ".rsvp-card, .rsvp-summary, .map-card, .map-details, .blessing-form, .blessing-board",
+          ".rsvp-card, .rsvp-summary, .map-card, .map-details",
         y: 90,
         stagger: 0.14,
         start: "top 84%",
@@ -3530,30 +3524,7 @@ export default function KeralaWeddingTemplate() {
     }
   };
 
-  const handleBlessingSubmit = (event) => {
-    event.preventDefault();
 
-    const name = formData.name.trim();
-    const message = formData.message.trim();
-
-    if (!name || !message) return;
-
-    const newBlessing = {
-      name,
-      relation: formData.relation.trim() || "Well Wisher",
-      message,
-      date: new Date().toLocaleDateString("en-GB"),
-    };
-
-    const updatedBlessings = [newBlessing, ...blessings];
-
-    setBlessings(updatedBlessings);
-    localStorage.setItem("wedding_blessings", JSON.stringify(updatedBlessings));
-    setFormData({ name: "", relation: "", message: "" });
-    setIsSubmitted(true);
-
-    window.setTimeout(() => setIsSubmitted(false), 4000);
-  };
 
   const handleRsvpSubmit = (event) => {
     event.preventDefault();
@@ -3760,6 +3731,25 @@ export default function KeralaWeddingTemplate() {
 
               {renderCalendar()}
 
+              <div className="line-reveal" style={{ display: "flex", justifyContent: "center", marginTop: "16px" }}>
+                <button
+                  type="button"
+                  className="ghost-button magnetic"
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(234, 214, 173, 0.3)",
+                    color: "var(--champagne)",
+                    padding: "8px 16px",
+                    fontSize: "10px",
+                    borderRadius: "999px",
+                  }}
+                  onClick={handleSaveToCalendar}
+                >
+                  <CalendarIcon size={12} />
+                  {t.saveToCalendar}
+                </button>
+              </div>
+
               <div className="hero-mini-names line-reveal">
                 <h3>{lang === "en" ? "Muhammad Fayas" : "മുഹമ്മദ് ഫയാസ്"}</h3>
                 <div className="amp">&</div>
@@ -3839,6 +3829,15 @@ export default function KeralaWeddingTemplate() {
                 >
                   <CheckCircle2 size={15} />
                   RSVP
+                </button>
+
+                <button
+                  type="button"
+                  className="ghost-button magnetic"
+                  onClick={handleSaveToCalendar}
+                >
+                  <CalendarIcon size={15} />
+                  {t.saveToCalendar}
                 </button>
               </div>
             </div>
@@ -4132,7 +4131,7 @@ export default function KeralaWeddingTemplate() {
 
                   <div className="collage-photo-badge">
                     <Heart size={14} fill="currentColor" />
-                    Wedding Moments
+                     Moments
                   </div>
                 </button>
 
@@ -4380,144 +4379,7 @@ export default function KeralaWeddingTemplate() {
             </div>
           </section>
 
-          <LuxuryDivider label={art.monogram} />
 
-          <section className="section blessing-section">
-            <div className="section-inner">
-              <div className="section-heading reveal">
-                <div className="section-kicker">
-                  <Send size={15} />
-                  Blessings
-                </div>
-                <h2 className="section-title">{t.blessingBoardTitle}</h2>
-                <p className="section-copy">{t.blessingBoardSubtitle}</p>
-              </div>
-
-              <div className="blessing-grid">
-                <div className="blessing-form reveal">
-                  <h3 className="card-title">{t.leaveBlessing}</h3>
-
-                  <form onSubmit={handleBlessingSubmit}>
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="blessing-name">
-                        {t.yourName}
-                      </label>
-                      <input
-                        id="blessing-name"
-                        type="text"
-                        className="form-input"
-                        placeholder={lang === "en" ? "Your name" : "നിങ്ങളുടെ പേര്"}
-                        value={formData.name}
-                        onChange={(event) =>
-                          setFormData({ ...formData, name: event.target.value })
-                        }
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="blessing-relation">
-                        {t.relation}
-                      </label>
-                      <input
-                        id="blessing-relation"
-                        type="text"
-                        className="form-input"
-                        placeholder={
-                          lang === "en"
-                            ? "Friend / Family / Colleague"
-                            : "സുഹൃത്ത് / കുടുംബാംഗം"
-                        }
-                        value={formData.relation}
-                        onChange={(event) =>
-                          setFormData({
-                            ...formData,
-                            relation: event.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="blessing-message">
-                        {t.blessingMessage}
-                      </label>
-                      <textarea
-                        id="blessing-message"
-                        className="form-textarea"
-                        placeholder={
-                          lang === "en"
-                            ? "Write your blessing here..."
-                            : "നിങ്ങളുടെ ആശംസകൾ ഇവിടെ കുറിക്കൂ..."
-                        }
-                        value={formData.message}
-                        onChange={(event) =>
-                          setFormData({
-                            ...formData,
-                            message: event.target.value,
-                          })
-                        }
-                        required
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="gold-button magnetic"
-                      style={{ width: "100%" }}
-                    >
-                      <Send size={15} />
-                      {t.sendBlessing}
-                    </button>
-
-                    {isSubmitted && (
-                      <div className="success-message">{t.thankYou}</div>
-                    )}
-                  </form>
-                </div>
-
-                <div className="blessing-board reveal">
-                  <div className="board-head">
-                    <h3 className="card-title" style={{ margin: 0 }}>
-                      {t.wishesAndBlessings}
-                    </h3>
-                    <span className="note-count">
-                      {blessings.length} {t.notes}
-                    </span>
-                  </div>
-
-                  <div className="blessings-list">
-                    {blessings.length === 0 ? (
-                      <div className="empty-state">{t.noBlessingsYet}</div>
-                    ) : (
-                      blessings.map((blessing, index) => (
-                        <div
-                          key={`${blessing.name}-${index}`}
-                          className="blessing-item"
-                        >
-                          <p className="blessing-text">“{blessing.message}”</p>
-                          <div className="blessing-meta">
-                            <span className="blessing-author">
-                              {blessing.name}{" "}
-                              <span
-                                style={{
-                                  color: "var(--muted)",
-                                  fontWeight: 500,
-                                }}
-                              >
-                                ({blessing.relation})
-                              </span>
-                            </span>
-                            <span>{blessing.date}</span>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
         </main>
 
         <footer className="footer">
@@ -4542,6 +4404,24 @@ export default function KeralaWeddingTemplate() {
           <p className="footer-quote">{t.footerQuote}</p>
           <div className="footer-address">{t.footerAddress}</div>
           <div className="footer-copy">{t.footerCopyright}</div>
+          <div className="footer-copy" style={{ marginTop: "12px", opacity: 0.8 }}>
+            made with{" "}
+            <a
+              href="https://triredglobal.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "var(--champagne)",
+                textDecoration: "none",
+                fontWeight: 600,
+                borderBottom: "1px solid rgba(234, 214, 173, 0.4)",
+                transition: "color 0.25s ease, border-color 0.25s ease"
+              }}
+              className="studio-link"
+            >
+              trired global venture studio
+            </a>
+          </div>
         </footer>
 
         {lightboxIndex !== null && (
