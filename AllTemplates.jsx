@@ -25,6 +25,7 @@ import {
   Crown,
   Feather,
   Gem,
+  Share2,
 } from "lucide-react";
 
 import heroBg from "./assets/hero-bg.jpg";
@@ -2553,6 +2554,8 @@ const TRANSLATIONS = {
     callGroom: "Call Groom",
     exploreBtn: "Explore Wedding",
     saveToCalendar: "Save to Calendar",
+    shareBtn: "Share",
+    copied: "Copied!",
     happyCoupleTitle: "The Happy Couple",
     happyCoupleSubtitle:
       "With hearts full of love, we introduce the bride and the groom as they begin this beautiful lifetime journey together.",
@@ -2637,6 +2640,8 @@ const TRANSLATIONS = {
     callGroom: "വരനെ വിളിക്കുക",
     exploreBtn: "വിവാഹവിവരങ്ങൾ",
     saveToCalendar: "കലണ്ടറിൽ ചേർക്കുക",
+    shareBtn: "പങ്കുവെക്കുക",
+    copied: "കോപ്പി ചെയ്തു!",
     happyCoupleTitle: "വധൂവരന്മാർ",
     happyCoupleSubtitle:
       "സ്നേഹനിർഭരമായ ഹൃദയത്തോടെ, ഞങ്ങൾ വധൂവരന്മാരെ പരിചയപ്പെടുത്തുന്നു.",
@@ -2749,6 +2754,32 @@ export default function KeralaWeddingTemplate() {
 
   const t = TRANSLATIONS[lang];
   const art = ART_QUOTES[lang];
+
+  const [copiedLink, setCopiedLink] = useState(false);
+
+  const handleShareInvitation = async () => {
+    const shareData = {
+      title: "Wedding Invitation | Muhammad Fayas & Keerthi Anilkumar",
+      text: "We cordially invite you to celebrate our wedding at Serene Lake Resort, Kappil, Kerala.",
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // cancelled or error
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setCopiedLink(true);
+        window.setTimeout(() => setCopiedLink(false), 2500);
+      } catch (err) {
+        // failed
+      }
+    }
+  };
 
   const handleSaveToCalendar = () => {
     const title = "Wedding | Muhammad Fayas & Keerthi Anilkumar";
@@ -3838,6 +3869,15 @@ export default function KeralaWeddingTemplate() {
                 >
                   <CalendarIcon size={15} />
                   {t.saveToCalendar}
+                </button>
+
+                <button
+                  type="button"
+                  className="ghost-button magnetic"
+                  onClick={handleShareInvitation}
+                >
+                  <Share2 size={15} />
+                  {copiedLink ? t.copied : t.shareBtn}
                 </button>
               </div>
             </div>
