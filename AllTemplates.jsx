@@ -32,8 +32,8 @@ import heroBg from "./assets/hero-bg.jpg";
 import groomPhoto from "./assets/groom.jpg";
 import bridePhoto from "./assets/bride.jpg";
 import resortPhoto from "./assets/resort.jpg";
-import roomPhoto from "./assets/room.jpg";
-import weddingMusic from "./assets/soft-wedding-music.mp3";
+import roomPhoto from "./assets/room.jpeg";
+import weddingMusic from "./assets/soft-wedding-music.m4a";
 
 import gallery1 from "./src/assets/images/img5.jpg";
 import gallery2 from "./src/assets/images/img6.jpg";
@@ -2785,10 +2785,10 @@ export default function KeralaWeddingTemplate() {
     const title = "Wedding | Muhammad Fayas & Keerthi Anilkumar";
     const description = "Join us for our wedding celebration and feast at Serene Lake Resort, Kappil.";
     const location = "Serene Lake Resort, Kappil Rd, Kappil, Edava, Kerala 695311, India";
-    
+
     const startStr = "20260913T103000Z";
     const endStr = "20260913T143000Z";
-    
+
     const icsContent = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
@@ -3596,9 +3596,8 @@ export default function KeralaWeddingTemplate() {
       cells.push(
         <div
           key={`day-${day}`}
-          className={`calendar-day-cell ${
-            isWeddingDay ? "calendar-day-circled" : ""
-          }`}
+          className={`calendar-day-cell ${isWeddingDay ? "calendar-day-circled" : ""
+            }`}
         >
           {day}
         </div>
@@ -4162,7 +4161,7 @@ export default function KeralaWeddingTemplate() {
 
                   <div className="collage-photo-badge">
                     <Heart size={14} fill="currentColor" />
-                     Moments
+                    Moments
                   </div>
                 </button>
 
