@@ -3751,9 +3751,9 @@ export default function KeralaWeddingTemplate() {
               </div>
 
               <div className="hero-mini-names line-reveal">
-                <h3>{lang === "en" ? "Muhammad Fayas" : "മുഹമ്മദ് ഫയാസ്"}</h3>
+                <h3 style={{ color: "#ffffff" }}>{lang === "en" ? "Muhammad Fayas" : "മുഹമ്മദ് ഫയാസ്"}</h3>
                 <div className="amp">&</div>
-                <h3>
+                <h3 style={{ color: "#ffffff" }}>
                   {lang === "en" ? "Keerthi Anilkumar" : "കീർത്തി അനിൽകുമാർ"}
                 </h3>
               </div>
