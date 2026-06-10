@@ -2519,16 +2519,16 @@ const TRANSLATIONS = {
     brideHome: "Hailing from Kollam, Kerala",
     invitationTitle: "Our Wedding Invitation",
     inviteText:
-      "Together with our families, we cordially invite you to share our happiness and witness our vows as we join our lives in marriage.",
+      "Together with our families, we cordially invite you to share our happiness and celebrate our wedding.",
     inviteDetails:
-      "Please join us for our wedding ceremony followed by a celebratory feast on the scenic backwaters of Kappil, Kerala.",
+      "Please join us for our wedding celebration followed by a party and feast on the scenic backwaters of Kappil, Kerala.",
     groomSide: "Groom's Side",
     groomSideFamily: "Family of Late Abdul Jabbar",
     brideSide: "Bride's Side",
     brideSideFamily: "Family of Anilkumar",
     venueTitle: "The Wedding Venue",
-    ceremonyTime: "Wedding Ceremony",
-    muhurthamTime: "10:30 AM onwards",
+    ceremonyTime: "Wedding Celebration",
+    muhurthamTime: "4:00 PM onwards",
     venueLocation: "Venue Location",
     lakesideResort: "Scenic lakeside resort near Kappil Beach backwaters",
     openMap: "Open Location Map",
@@ -2565,7 +2565,7 @@ const TRANSLATIONS = {
     countdown: ["Days", "Hours", "Mins", "Secs"],
     scheduleTitle: "Wedding Day Timeline",
     scheduleSubtitle:
-      "A graceful celebration planned with love, blessings, ceremony, feast, and memories.",
+      "A graceful celebration planned with love, blessings, music, feast, and memories.",
     rsvpTitle: "RSVP",
     rsvpSubtitle:
       "Kindly let us know if you will be joining us for the celebration.",
@@ -2606,16 +2606,16 @@ const TRANSLATIONS = {
     brideHome: "കൊല്ലം സ്വദേശി",
     invitationTitle: "വിവാഹ ക്ഷണം",
     inviteText:
-      "പരസ്പരം തണലാകുവാൻ താലിച്ചരടാൽ ബന്ധിതരാകുന്ന വിവാഹ മംഗളമുഹൂർത്തത്തിന് സാക്ഷ്യം വഹിക്കുവാൻ ബന്ധുമിത്രാദികളായ നിങ്ങളെ എല്ലാവരെയും സസ്‌നേഹം ക്ഷണിക്കുന്നു.",
+      "ഞങ്ങളുടെ വിവാഹത്തോടനുബന്ധിച്ച് നടക്കുന്ന സ്നേഹാഘോഷങ്ങളിൽ പങ്കുചേരുന്നതിനായി ബന്ധുമിത്രാദികളായ നിങ്ങളെ എല്ലാവരെയും സസ്‌നേഹം ക്ഷണിക്കുന്നു.",
     inviteDetails:
-      "കപ്പിൽ കായൽക്കരയിൽ വെച്ചു നടക്കുന്ന വിവാഹ ചടങ്ങുകളിലേക്കും തുടർന്ന് നടക്കുന്ന സ്നേഹവിരുന്നിലേക്കും നിങ്ങളെ സ്വാഗതം ചെയ്യുന്നു.",
+      "കപ്പിൽ കായൽക്കരയിൽ വെച്ചു നടക്കുന്ന വിവാഹ ആഘോഷങ്ങളിലേക്കും തുടർന്ന് നടക്കുന്ന സ്നേഹവിരുന്നിലേക്കും നിങ്ങളെ സ്വാഗതം ചെയ്യുന്നു.",
     groomSide: "വരന്റെ കുടുംബം",
     groomSideFamily: "അബ്ദുൽ ജബ്ബാറിന്റെ കുടുംബം",
     brideSide: "വധുവിന്റെ കുടുംബം",
     brideSideFamily: "അനിൽകുമാറിന്റെ കുടുംബം",
     venueTitle: "വിവാഹ വേദി",
-    ceremonyTime: "വിവാഹ മംഗളമുഹൂർത്തം",
-    muhurthamTime: "രാവിലെ 10:30 മുതൽ",
+    ceremonyTime: "വിവാഹ ആഘോഷം",
+    muhurthamTime: "വൈകുന്നേരം 04:00 മുതൽ",
     venueLocation: "വിവാഹ സ്ഥലം",
     lakesideResort: "കാപ്പിൽ കായലിന്റെ മനോഹരമായ തീരത്ത്",
     openMap: "വഴി കാണിക്കുന്ന മാപ്പ്",
@@ -2651,7 +2651,7 @@ const TRANSLATIONS = {
     countdown: ["ദിവസം", "മണി", "മിനിറ്റ്", "സെക്കന്റ്"],
     scheduleTitle: "വിവാഹ ദിന പരിപാടികൾ",
     scheduleSubtitle:
-      "സ്നേഹവും അനുഗ്രഹവും വിവാഹ ചടങ്ങും സ്നേഹവിരുന്നും നിറഞ്ഞ ആഘോഷം.",
+      "സ്നേഹവും അനുഗ്രഹവും സ്നേഹവിരുന്നും നിറഞ്ഞ ആഘോഷം.",
     rsvpTitle: "ആർ.എസ്.വി.പി",
     rsvpSubtitle: "വിവാഹ ആഘോഷത്തിൽ പങ്കെടുക്കുമോ എന്ന് ദയവായി അറിയിക്കൂ.",
     rsvpName: "അതിഥിയുടെ പേര്",
@@ -2726,7 +2726,7 @@ function LuxuryDivider({ label = "Fayas & Keerthi" }) {
   );
 }
 
-const WEDDING_DATE = new Date("2026-09-13T10:30:00+05:30");
+const WEDDING_DATE = new Date("2026-09-13T16:00:00+05:30");
 
 export default function KeralaWeddingTemplate() {
   const containerRef = useRef(null);
@@ -2783,11 +2783,11 @@ export default function KeralaWeddingTemplate() {
 
   const handleSaveToCalendar = () => {
     const title = "Wedding | Muhammad Fayas & Keerthi Anilkumar";
-    const description = "Join us for our wedding ceremony and celebratory feast at Serene Lake Resort, Kappil.";
+    const description = "Join us for our wedding celebration and feast at Serene Lake Resort, Kappil.";
     const location = "Serene Lake Resort, Kappil Rd, Kappil, Edava, Kerala 695311, India";
     
-    const startStr = "20260913T050000Z";
-    const endStr = "20260913T100000Z";
+    const startStr = "20260913T103000Z";
+    const endStr = "20260913T143000Z";
     
     const icsContent = [
       "BEGIN:VCALENDAR",
@@ -2831,34 +2831,25 @@ export default function KeralaWeddingTemplate() {
   const timelineItems = useMemo(
     () => [
       {
-        time: lang === "en" ? "09:30 AM" : "രാവിലെ 09:30",
+        time: lang === "en" ? "04:00 PM" : "വൈകുന്നേരം 04:00",
         title: lang === "en" ? "Guest Arrival" : "അതിഥികളെ സ്വാഗതം",
         copy:
           lang === "en"
             ? "A warm lakeside welcome for family and friends."
-            : "കുടുംബാംഗങ്ങളെയും സുഹൃത്തുകളെയും സ്നേഹത്തോടെ സ്വാഗതം ചെയ്യുന്നു.",
+            : "കുടുംബാംഗങ്ങളെയും സുഹൃത്തുക്കളെയും സ്നേഹത്തോടെ സ്വാഗതം ചെയ്യുന്നു.",
         icon: Users,
       },
       {
-        time: lang === "en" ? "10:30 AM" : "രാവിലെ 10:30",
-        title: lang === "en" ? "Wedding Ceremony" : "വിവാഹ മംഗളമുഹൂർത്തം",
+        time: lang === "en" ? "04:30 PM" : "വൈകുന്നേരം 04:30",
+        title: lang === "en" ? "Celebration Party" : "വിവാഹ ആഘോഷം",
         copy:
           lang === "en"
-            ? "The sacred wedding ceremony begins with blessings."
-            : "അനുഗ്രഹങ്ങളോടെ വിവാഹ ചടങ്ങുകൾ ആരംഭിക്കുന്നു.",
-        icon: Heart,
-      },
-      {
-        time: lang === "en" ? "12:00 PM" : "ഉച്ചയ്ക്ക് 12:00",
-        title: lang === "en" ? "Blessings & Photos" : "ആശംസകളും ചിത്രങ്ങളും",
-        copy:
-          lang === "en"
-            ? "Family blessings, portraits, and beautiful memories."
-            : "കുടുംബ ആശംസകളും ചിത്രങ്ങളും മനോഹര നിമിഷങ്ങളും.",
+            ? "Music, fun, and beautiful memories under the evening sky."
+            : "സായഹ്നത്തിൽ സംഗീതവും മനോഹരമായ നിമിഷങ്ങളും.",
         icon: Sparkles,
       },
       {
-        time: lang === "en" ? "01:00 PM" : "ഉച്ചയ്ക്ക് 01:00",
+        time: lang === "en" ? "06:00 PM" : "വൈകുന്നേരം 06:00",
         title: lang === "en" ? "Wedding Feast" : "സ്നേഹവിരുന്ന്",
         copy:
           lang === "en"
@@ -4084,7 +4075,7 @@ export default function KeralaWeddingTemplate() {
               <div className="section-heading reveal">
                 <div className="section-kicker">
                   <Clock size={15} />
-                  Ceremony
+                  {lang === "en" ? "Celebration" : "ആഘോഷം"}
                 </div>
                 <h2 className="section-title">{t.scheduleTitle}</h2>
                 <p className="section-copy">{t.scheduleSubtitle}</p>
