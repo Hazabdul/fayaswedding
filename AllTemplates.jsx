@@ -2532,7 +2532,7 @@ const TRANSLATIONS = {
     venueLocation: "Venue Location",
     lakesideResort: "Scenic lakeside resort near Kappil Beach backwaters",
     openMap: "Open Location Map",
-    galleryTitle: "Wedding Gallery",
+    galleryTitle: "Gallery",
     gallerySubtitle:
       "A modern gallery of beautiful memories, resort moments, and the surroundings of our celebration.",
     blessingBoardTitle: "Wedding Blessing Board",
