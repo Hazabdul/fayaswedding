@@ -115,7 +115,7 @@ button {
 .wedding-canvas {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 9998;
   pointer-events: none;
 }
 
@@ -158,7 +158,6 @@ button {
   text-align: center;
   color: var(--champagne);
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(234,214,173,0.28);
   box-shadow:
     0 30px 90px rgba(0,0,0,0.28),
     inset 0 0 0 14px rgba(255,255,255,0.025);
@@ -166,11 +165,51 @@ button {
   -webkit-backdrop-filter: blur(18px);
 }
 
-.intro-mark span {
+.intro-mark-ring {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  pointer-events: none;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  stroke: rgba(234, 214, 173, 0.14);
+}
+
+.ring-draw {
+  stroke: url(#gold-gradient);
+  stroke-linecap: round;
+}
+
+.monogram-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.left-char, .right-char {
+  display: inline-block;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(52px, 12vw, 88px);
   letter-spacing: -0.08em;
   line-height: 1;
+}
+
+.dot-char {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(52px, 12vw, 88px);
+  letter-spacing: -0.08em;
+  line-height: 1;
+  color: var(--gold);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
 }
 
 .intro-mark small {
@@ -1455,230 +1494,123 @@ button {
   line-height: 1.7;
 }
 
-.modern-gallery-collage {
-  display: grid;
-  grid-template-columns: 1.25fr 0.8fr 0.9fr;
-  grid-template-rows: 195px 195px 215px;
-  gap: 14px;
-  min-height: 625px;
-}
-
-.modern-collage-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.78);
-  border: 1px solid rgba(199,155,59,0.2);
-  box-shadow: 0 18px 48px rgba(33,27,32,0.13);
-  cursor: pointer;
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
-  outline: 1px solid rgba(255,255,255,0.4);
-  outline-offset: -8px;
-}
-
-button.modern-collage-card {
-  padding: 0;
-  appearance: none;
-}
-
-.modern-collage-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.1s ease, opacity 0.6s ease, filter 0.6s ease;
-  will-change: transform, opacity;
-}
-
-.modern-collage-card:hover {
-  box-shadow:
-    0 28px 72px rgba(33,27,32,0.22),
-    0 0 0 1px rgba(234,214,173,0.22);
-}
-
-.modern-collage-card:hover img {
-  transform: scale(1.08);
-  filter: brightness(0.82);
-}
-
-.modern-collage-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background: linear-gradient(180deg, transparent, rgba(33,27,32,0.42));
-  transition: opacity 0.45s ease;
-}
-
-.modern-collage-card:hover::after {
-  opacity: 1;
-}
-
-.collage-main {
-  grid-column: 1 / 2;
-  grid-row: 1 / 4;
-}
-
-.collage-small-top {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-}
-
-.collage-name-card {
-  position: relative;
-  grid-column: 3 / 4;
-  grid-row: 1 / 2;
-  cursor: default;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 22px;
-  background:
-    linear-gradient(135deg, rgba(199,155,59,0.88), rgba(143,103,35,0.78)),
-    radial-gradient(circle at top, rgba(255,255,255,0.28), transparent 18rem);
-  color: #fff;
-}
-
-.collage-name-card::after {
-  display: none;
-}
-
-.collage-name-card::before {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.26);
-  pointer-events: none;
-}
-
-.collage-name-card p {
-  margin: 0 0 8px;
-  font-size: 10px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  opacity: 0.82;
-  font-weight: 900;
-}
-
-.collage-name-card h3 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(26px, 4vw, 42px);
-  line-height: 1;
-  font-weight: 400;
-  letter-spacing: -0.05em;
-}
-
-.collage-name-card h3 span {
-  color: #fff3cf;
-  font-style: italic;
-}
-
-.collage-name-card small {
-  margin-top: 8px;
-  font-size: 12px;
-  opacity: 0.86;
-}
-
-.collage-wide {
-  grid-column: 2 / 4;
-  grid-row: 2 / 3;
-}
-
-.collage-tall {
-  grid-column: 3 / 4;
-  grid-row: 3 / 4;
-}
-
-.collage-bottom {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
-}
-
-.collage-main-overlay {
-  position: absolute;
-  z-index: 2;
-  inset: auto 0 0;
-  min-height: 42%;
-  padding: 36px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  text-align: center;
-  background:
-    linear-gradient(180deg, transparent, rgba(33,27,32,0.84)),
-    radial-gradient(circle at center, rgba(199,155,59,0.18), transparent 16rem);
-  color: #fff;
-}
-
-.collage-main-overlay span {
-  color: var(--champagne);
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-.collage-main-overlay h3 {
-  margin: 11px 0 8px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(44px, 7vw, 76px);
-  line-height: 0.9;
-  font-weight: 400;
-  letter-spacing: -0.075em;
-}
-
-.collage-main-overlay p {
-  margin: 0;
-  color: rgba(255,255,255,0.82);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-}
-
-.collage-photo-badge {
-  position: absolute;
-  z-index: 2;
-  left: 16px;
-  bottom: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 10px 13px;
-  border-radius: 999px;
-  color: #fff;
-  background: rgba(91,23,79,0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-}
-
-.gallery-dots {
-  margin-top: 25px;
+.gallery-tabs {
   display: flex;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
-.gallery-dots button {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border: 0;
+.gallery-tab-btn {
+  border: 1px solid rgba(199, 155, 59, 0.25);
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--plum);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 20px;
   border-radius: 999px;
-  background: rgba(91,23,79,0.22);
   cursor: pointer;
-  transition: width 0.3s ease, background 0.3s ease;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.gallery-dots button.active {
-  width: 30px;
-  background: linear-gradient(135deg, var(--gold), var(--plum));
+.gallery-tab-btn:hover {
+  background: rgba(199, 155, 59, 0.12);
+  transform: translateY(-2px);
 }
+
+.gallery-tab-btn.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--plum), var(--berry));
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(91, 23, 79, 0.2);
+}
+
+.modern-masonry-grid {
+  column-count: 3;
+  column-gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .modern-masonry-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .modern-masonry-grid {
+    column-count: 1;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(199, 155, 59, 0.18);
+  box-shadow: 0 12px 36px rgba(33, 27, 32, 0.08);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+  display: block;
+  padding: 0;
+  text-align: left;
+}
+
+.masonry-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(33, 27, 32, 0.16);
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.masonry-item:hover img {
+  transform: scale(1.03);
+}
+
+.masonry-item-info {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 24px 20px 16px;
+  background: linear-gradient(to top, rgba(33, 27, 32, 0.9) 0%, rgba(33, 27, 32, 0.4) 60%, transparent 100%);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.masonry-item:hover .masonry-item-info {
+  opacity: 1;
+}
+
+.masonry-item-info h4 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.masonry-item-info p {
+  margin: 4px 0 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--champagne);
+}
+
 
 .rsvp-section .section-inner,
 .blessing-section .section-inner,
@@ -2259,47 +2191,7 @@ button.modern-collage-card {
     justify-content: flex-start;
   }
 
-  .modern-gallery-collage {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 440px 170px 210px 210px;
-    gap: 10px;
-    min-height: auto;
-  }
 
-  .modern-collage-card {
-    border-radius: 23px;
-  }
-
-  .collage-main {
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
-  }
-
-  .collage-small-top {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-  }
-
-  .collage-name-card {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    padding: 16px;
-  }
-
-  .collage-wide {
-    grid-column: 1 / 3;
-    grid-row: 3 / 4;
-  }
-
-  .collage-bottom {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-  }
-
-  .collage-tall {
-    grid-column: 2 / 3;
-    grid-row: 4 / 5;
-  }
 
   .lightbox-prev,
   .lightbox-next {
@@ -2424,35 +2316,7 @@ button.modern-collage-card {
     letter-spacing: -0.06em;
   }
 
-  .modern-gallery-collage {
-    grid-template-rows: 390px 150px 190px 190px;
-    gap: 9px;
-  }
 
-  .collage-main-overlay {
-    padding: 26px 18px;
-  }
-
-  .collage-main-overlay h3 {
-    font-size: 42px;
-  }
-
-  .collage-main-overlay p {
-    font-size: 11px;
-  }
-
-  .collage-name-card p {
-    font-size: 8px;
-    letter-spacing: 0.16em;
-  }
-
-  .collage-name-card h3 {
-    font-size: 24px;
-  }
-
-  .collage-name-card small {
-    font-size: 10px;
-  }
 
   .quote-card {
     border-radius: 34px;
@@ -2532,9 +2396,13 @@ const TRANSLATIONS = {
     venueLocation: "Venue Location",
     lakesideResort: "Scenic lakeside resort near Kappil Beach backwaters",
     openMap: "Open Location Map",
-    galleryTitle: "Gallery",
+    galleryTitle: "Wedding Gallery",
     gallerySubtitle:
       "A modern gallery of beautiful memories, resort moments, and the surroundings of our celebration.",
+    galleryAll: "All",
+    galleryCouple: "Couple",
+    galleryVenue: "Resort & Venue",
+    galleryMoments: "Moments",
     blessingBoardTitle: "Wedding Blessing Board",
     blessingBoardSubtitle:
       "Your blessings and presence mean the world to us. Please share a warm note of blessing or congratulations.",
@@ -2621,6 +2489,10 @@ const TRANSLATIONS = {
     openMap: "വഴി കാണിക്കുന്ന മാപ്പ്",
     galleryTitle: "ചിത്രങ്ങൾ",
     gallerySubtitle: "ഞങ്ങളുടെ ജീവിതത്തിലെ മനോഹരമായ നിമിഷങ്ങളുടെ ചിത്രങ്ങൾ.",
+    galleryAll: "എല്ലാം",
+    galleryCouple: "വധൂവരന്മാർ",
+    galleryVenue: "റിസോർട്ട് & വേദി",
+    galleryMoments: "മനോഹര നിമിഷങ്ങൾ",
     blessingBoardTitle: "ആശംസാ ബോർഡ്",
     blessingBoardSubtitle:
       "ഞങ്ങളുടെ പുതിയ ജീവിതയാത്രക്ക് നിങ്ങളുടെ പ്രാർത്ഥനകളും അനുഗ്രഹങ്ങളും ആശംസകളും അറിയിക്കൂ.",
@@ -2737,7 +2609,7 @@ export default function KeralaWeddingTemplate() {
   const [lang, setLang] = useState("en");
   const [isPlaying, setIsPlaying] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [galleryStep, setGalleryStep] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("all");
   const [rsvpData, setRsvpData] = useState({
     name: "",
     guests: "1",
@@ -2752,8 +2624,17 @@ export default function KeralaWeddingTemplate() {
     seconds: 0,
   });
 
+
   const t = TRANSLATIONS[lang];
   const art = ART_QUOTES[lang];
+
+  const monogramParts = useMemo(() => {
+    const parts = art.monogram.split(/\s+/);
+    if (parts.length === 3) {
+      return { left: parts[0], dot: parts[1], right: parts[2] };
+    }
+    return { left: "F", dot: "·", right: "K" };
+  }, [art.monogram]);
 
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -2812,20 +2693,31 @@ export default function KeralaWeddingTemplate() {
     document.body.removeChild(link);
   };
 
-  const galleryImages = useMemo(
+  const galleryItems = useMemo(
     () =>
       [
-        roomPhoto,
-        groomPhoto,
-        bridePhoto,
-        gallery1,
-        gallery2,
-        gallery3,
-        gallery4,
-        gallery5,
-        gallery6,
-      ].filter(Boolean),
-    []
+        { src: groomPhoto, category: "couple", title: lang === "en" ? "The Groom" : "വരൻ" },
+        { src: bridePhoto, category: "couple", title: lang === "en" ? "The Bride" : "വധു" },
+        { src: roomPhoto, category: "venue", title: lang === "en" ? "Resort Stay" : "റിസോർട്ട് റൂം" },
+        { src: resortPhoto, category: "venue", title: lang === "en" ? "Serene Resort" : "ലേക്ക് റിസോർട്ട്" },
+        { src: gallery1, category: "celebration", title: lang === "en" ? "Traditional Vibes" : "ആഘോഷങ്ങൾ" },
+        { src: gallery2, category: "celebration", title: lang === "en" ? "Cherished Moments" : "മനോഹര നിമിഷങ്ങൾ" },
+        { src: gallery3, category: "celebration", title: lang === "en" ? "Elegant Decor" : "വിവാഹ അലങ്കാരം" },
+        { src: gallery4, category: "celebration", title: lang === "en" ? "Happy Celebrations" : "സന്തോഷ നിമിഷങ്ങൾ" },
+        { src: gallery5, category: "celebration", title: lang === "en" ? "Resort Landscape" : "റിസോർട്ട് കാഴ്ച" },
+        { src: gallery6, category: "celebration", title: lang === "en" ? "Lake View" : "കായൽ ഭംഗി" },
+      ].filter((item) => item.src),
+    [lang, groomPhoto, bridePhoto, roomPhoto, resortPhoto, gallery1, gallery2, gallery3, gallery4, gallery5, gallery6]
+  );
+
+  const filteredGalleryItems = useMemo(() => {
+    if (activeCategory === "all") return galleryItems;
+    return galleryItems.filter((item) => item.category === activeCategory);
+  }, [activeCategory, galleryItems]);
+
+  const filteredGalleryImages = useMemo(
+    () => filteredGalleryItems.map((item) => item.src),
+    [filteredGalleryItems]
   );
 
   const timelineItems = useMemo(
@@ -2904,18 +2796,6 @@ export default function KeralaWeddingTemplate() {
   }, [countdown]);
 
   useEffect(() => {
-    if (!galleryImages.length) return;
-
-    const interval = window.setInterval(() => {
-      setGalleryStep((prev) => (prev + 1) % galleryImages.length);
-    }, 3000);
-
-    return () => window.clearInterval(interval);
-  }, [galleryImages.length]);
-
-
-
-  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || getReducedMotionPreference()) return;
 
@@ -2950,32 +2830,72 @@ export default function KeralaWeddingTemplate() {
       particle.hue = Math.random() > 0.5 ? "199,155,59" : "139,45,109";
     };
 
+    window.triggerIntroFireworks = () => {
+      const centerX = width / 2;
+      const centerY = height / 2;
+      for (let i = 0; i < 90; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 5.5 + 1.5;
+        particles.push({
+          x: centerX,
+          y: centerY,
+          radius: Math.random() * 3.5 + 1,
+          speedX: Math.cos(angle) * speed,
+          speedY: Math.sin(angle) * speed,
+          gravity: 0.1,
+          alpha: 1.0,
+          decay: Math.random() * 0.013 + 0.007,
+          hue: Math.random() > 0.6 ? "234,214,173" : "199,155,59",
+          isFirework: true,
+        });
+      }
+    };
+
     const draw = () => {
       context.clearRect(0, 0, width, height);
 
-      particles.forEach((particle) => {
-        particle.y += particle.speedY;
-        particle.x += particle.speedX + Math.sin(particle.y / 90) * 0.12;
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
 
-        if (particle.y < -particle.radius) resetParticle(particle);
+        if (particle.isFirework) {
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
+          particle.speedY += particle.gravity;
+          particle.alpha -= particle.decay;
 
-        const gradient = context.createRadialGradient(
-          particle.x,
-          particle.y,
-          0,
-          particle.x,
-          particle.y,
-          particle.radius
-        );
+          if (particle.alpha <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
 
-        gradient.addColorStop(0, `rgba(${particle.hue}, ${particle.alpha})`);
-        gradient.addColorStop(1, `rgba(${particle.hue}, 0)`);
+          context.beginPath();
+          context.fillStyle = `rgba(${particle.hue}, ${particle.alpha})`;
+          context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          context.fill();
+        } else {
+          particle.y += particle.speedY;
+          particle.x += particle.speedX + Math.sin(particle.y / 90) * 0.12;
 
-        context.beginPath();
-        context.fillStyle = gradient;
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fill();
-      });
+          if (particle.y < -particle.radius) resetParticle(particle);
+
+          const gradient = context.createRadialGradient(
+            particle.x,
+            particle.y,
+            0,
+            particle.x,
+            particle.y,
+            particle.radius
+          );
+
+          gradient.addColorStop(0, `rgba(${particle.hue}, ${particle.alpha})`);
+          gradient.addColorStop(1, `rgba(${particle.hue}, 0)`);
+
+          context.beginPath();
+          context.fillStyle = gradient;
+          context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          context.fill();
+        }
+      }
 
       animationFrameId = requestAnimationFrame(draw);
     };
@@ -2988,6 +2908,7 @@ export default function KeralaWeddingTemplate() {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", setSize);
+      delete window.triggerIntroFireworks;
     };
   }, []);
 
@@ -3065,29 +2986,49 @@ export default function KeralaWeddingTemplate() {
             ease: "power3.out",
           }
         )
-        .to(".intro-mark", {
-          opacity: 0,
-          scale: 1.08,
-          filter: "blur(8px)",
-          duration: 0.7,
-          delay: 0.45,
-          ease: "power2.inOut",
-        })
+        .fromTo(
+          ".ring-draw",
+          { strokeDashoffset: 295.3 },
+          {
+            strokeDashoffset: 0,
+            duration: 2.2,
+            ease: "power1.inOut",
+          },
+          "-=0.2"
+        )
+        .to(
+          ".intro-mark",
+          {
+            opacity: 0,
+            scale: 1.08,
+            filter: "blur(8px)",
+            duration: 0.6,
+            ease: "power2.inOut",
+            onComplete: () => {
+              if (window.triggerIntroFireworks) {
+                window.triggerIntroFireworks();
+              }
+            },
+          },
+          "+=0.15"
+        )
         .to(
           ".intro-veil-left",
           {
             xPercent: -102,
-            duration: 1.15,
-            ease: "power4.inOut",
+            skewX: -2,
+            duration: 1.25,
+            ease: "power3.inOut",
           },
-          "-=0.28"
+          "-=0.2"
         )
         .to(
           ".intro-veil-right",
           {
             xPercent: 102,
-            duration: 1.15,
-            ease: "power4.inOut",
+            skewX: 2,
+            duration: 1.25,
+            ease: "power3.inOut",
           },
           "<"
         )
@@ -3096,7 +3037,7 @@ export default function KeralaWeddingTemplate() {
         });
 
       const heroTimeline = gsap.timeline({
-        delay: 2.35,
+        delay: 3.55,
         defaults: {
           ease: studioEase,
         },
@@ -3276,12 +3217,23 @@ export default function KeralaWeddingTemplate() {
         }
       );
 
-      appear({
-        selector: ".modern-collage-card",
-        trigger: ".modern-gallery-collage",
-        y: 100,
-        stagger: 0.11,
-        start: "top 82%",
+      gsap.utils.toArray(".masonry-item").forEach((item) => {
+        gsap.fromTo(
+          item,
+          { opacity: 0, y: 60, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.75,
+            ease: studioEase,
+            scrollTrigger: {
+              trigger: item,
+              start: "top 92%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
       });
 
       appear({
@@ -3484,36 +3436,22 @@ export default function KeralaWeddingTemplate() {
     if (getReducedMotionPreference()) return;
 
     const ctx = gsap.context(() => {
-      const timeline = gsap.timeline();
-
-      timeline
-        .fromTo(
-          ".modern-collage-card img",
-          { opacity: 0, scale: 1.05 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.85,
-            stagger: 0.04,
-            ease: "power3.out",
-          }
-        )
-        .fromTo(
-          ".collage-main-overlay span, .collage-main-overlay h3, .collage-main-overlay p",
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.62,
-            stagger: 0.08,
-            ease: "power3.out",
-          },
-          "-=0.42"
-        );
+      gsap.fromTo(
+        ".masonry-item",
+        { opacity: 0, scale: 0.9, y: 30 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.05,
+          ease: "power3.out",
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
-  }, [galleryStep]);
+  }, [activeCategory]);
 
   useEffect(() => {
     return () => {
@@ -3625,25 +3563,15 @@ export default function KeralaWeddingTemplate() {
   const nextImage = (event) => {
     event.stopPropagation();
     setLightboxIndex((current) =>
-      current === galleryImages.length - 1 ? 0 : current + 1
+      current === filteredGalleryImages.length - 1 ? 0 : current + 1
     );
   };
 
   const prevImage = (event) => {
     event.stopPropagation();
     setLightboxIndex((current) =>
-      current === 0 ? galleryImages.length - 1 : current - 1
+      current === 0 ? filteredGalleryImages.length - 1 : current - 1
     );
-  };
-
-  const getGalleryImage = (offset) => {
-    if (!galleryImages.length) return "";
-    return galleryImages[(galleryStep + offset) % galleryImages.length];
-  };
-
-  const openGalleryImage = (offset) => {
-    if (!galleryImages.length) return;
-    setLightboxIndex((galleryStep + offset) % galleryImages.length);
   };
 
   const countdownValues = [
@@ -3659,7 +3587,41 @@ export default function KeralaWeddingTemplate() {
         <div className="intro-veil intro-veil-left" />
         <div className="intro-veil intro-veil-right" />
         <div className="intro-mark">
-          <span>{art.monogram}</span>
+          <svg className="intro-mark-ring" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ead6ad" />
+                <stop offset="50%" stopColor="#c79b3b" />
+                <stop offset="100%" stopColor="#8f6723" />
+              </linearGradient>
+            </defs>
+            <circle
+              className="ring-track"
+              cx="50"
+              cy="50"
+              r="47"
+              fill="transparent"
+              stroke="rgba(234, 214, 173, 0.12)"
+              strokeWidth="2.5"
+            />
+            <circle
+              className="ring-draw"
+              cx="50"
+              cy="50"
+              r="47"
+              fill="transparent"
+              stroke="url(#gold-gradient)"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeDasharray="295.3"
+              strokeDashoffset="295.3"
+            />
+          </svg>
+          <span className="monogram-text">
+            <span className="left-char">{monogramParts.left}</span>
+            <span className="dot-char">{monogramParts.dot}</span>
+            <span className="right-char">{monogramParts.right}</span>
+          </span>
           <small>{art.artLine}</small>
         </div>
       </div>
@@ -3669,6 +3631,8 @@ export default function KeralaWeddingTemplate() {
         <span className="scroll-jewel-progress" />
       </div>
       <div className="cursor-aura" aria-hidden="true" />
+
+
 
       <Flower2 size={64} className="floating-ornament one" aria-hidden="true" />
       <Sparkles size={58} className="floating-ornament two" aria-hidden="true" />
@@ -4121,76 +4085,51 @@ export default function KeralaWeddingTemplate() {
                 <p className="section-copy">{t.gallerySubtitle}</p>
               </div>
 
-              <div className="modern-gallery-collage">
+              <div className="gallery-tabs reveal">
                 <button
                   type="button"
-                  className="modern-collage-card collage-main"
-                  onClick={() => openGalleryImage(0)}
+                  className={`gallery-tab-btn magnetic ${activeCategory === "all" ? "active" : ""}`}
+                  onClick={() => setActiveCategory("all")}
                 >
-                  <img src={getGalleryImage(0)} alt="Wedding highlight" />
-
-                  <div className="collage-main-overlay">
-                    <span>{t.saveTheDate}</span>
-                    <h3 className="floating-gallery-title">Happily Ever After</h3>
-                    <p>{t.dateStringFormatted}</p>
-                  </div>
+                  {t.galleryAll || "All"}
                 </button>
-
                 <button
                   type="button"
-                  className="modern-collage-card collage-small-top"
-                  onClick={() => openGalleryImage(1)}
+                  className={`gallery-tab-btn magnetic ${activeCategory === "couple" ? "active" : ""}`}
+                  onClick={() => setActiveCategory("couple")}
                 >
-                  <img src={getGalleryImage(1)} alt="Wedding memory" />
+                  {t.galleryCouple || "Couple"}
                 </button>
-
-                <div className="modern-collage-card collage-name-card">
-                  <p>{t.togetherWithFamilies}</p>
-                  <h3>
-                    Fayas <span>&</span> Keerthi
-                  </h3>
-                  <small>{t.heartilyInvites}</small>
-                </div>
-
                 <button
                   type="button"
-                  className="modern-collage-card collage-wide"
-                  onClick={() => openGalleryImage(2)}
+                  className={`gallery-tab-btn magnetic ${activeCategory === "venue" ? "active" : ""}`}
+                  onClick={() => setActiveCategory("venue")}
                 >
-                  <img src={getGalleryImage(2)} alt="Wedding memory" />
-
-                  <div className="collage-photo-badge">
-                    <Heart size={14} fill="currentColor" />
-                    Moments
-                  </div>
+                  {t.galleryVenue || "Venue"}
                 </button>
-
                 <button
                   type="button"
-                  className="modern-collage-card collage-tall"
-                  onClick={() => openGalleryImage(3)}
+                  className={`gallery-tab-btn magnetic ${activeCategory === "celebration" ? "active" : ""}`}
+                  onClick={() => setActiveCategory("celebration")}
                 >
-                  <img src={getGalleryImage(3)} alt="Wedding memory" />
-                </button>
-
-                <button
-                  type="button"
-                  className="modern-collage-card collage-bottom"
-                  onClick={() => openGalleryImage(4)}
-                >
-                  <img src={getGalleryImage(4)} alt="Wedding memory" />
+                  {t.galleryMoments || "Celebration"}
                 </button>
               </div>
 
-              <div className="gallery-dots">
-                {galleryImages.map((_, index) => (
+              <div className="modern-gallery-masonry modern-masonry-grid">
+                {filteredGalleryItems.map((item, index) => (
                   <button
-                    key={index}
+                    key={`${item.src}-${index}`}
                     type="button"
-                    className={index === galleryStep ? "active" : ""}
-                    onClick={() => setGalleryStep(index)}
-                    aria-label={`Show gallery slide ${index + 1}`}
-                  />
+                    className="masonry-item"
+                    onClick={() => setLightboxIndex(index)}
+                  >
+                    <img src={item.src} alt={item.title} loading="lazy" />
+                    <div className="masonry-item-info">
+                      <h4>{item.title}</h4>
+                      <p>{item.category}</p>
+                    </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -4433,13 +4372,37 @@ export default function KeralaWeddingTemplate() {
 
           <p className="footer-quote">{t.footerQuote}</p>
           <div className="footer-address">{t.footerAddress}</div>
+
+          <div style={{ marginTop: "24px", marginBottom: "16px" }}>
+            <a 
+              href="#trired"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "10px 24px",
+                borderRadius: "999px",
+                border: "1px solid rgba(234, 214, 173, 0.35)",
+                background: "rgba(255, 255, 255, 0.05)",
+                color: "var(--champagne)",
+                textDecoration: "none",
+                fontSize: "12px",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                transition: "all 0.3s ease"
+              }}
+              className="footer-contact-btn magnetic"
+            >
+              <Sparkles size={13} /> Contact Us / Partner With Us
+            </a>
+          </div>
+
           <div className="footer-copy">{t.footerCopyright}</div>
           <div className="footer-copy" style={{ marginTop: "12px", opacity: 0.8 }}>
             made with{" "}
             <a
-              href="https://triredglobal.com/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#trired"
               style={{
                 color: "var(--champagne)",
                 textDecoration: "none",
@@ -4475,7 +4438,7 @@ export default function KeralaWeddingTemplate() {
             </button>
 
             <img
-              src={galleryImages[lightboxIndex]}
+              src={filteredGalleryImages[lightboxIndex]}
               alt={`Wedding large memory ${lightboxIndex + 1}`}
               className="lightbox-img"
               onClick={(event) => event.stopPropagation()}

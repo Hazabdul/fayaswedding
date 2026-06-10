@@ -1106,3 +1106,112 @@ p {
     radial-gradient(circle at 100% 100%, rgba(187, 247, 208, 0.22) 0%, transparent 60%),
     linear-gradient(135deg, #ffffff, #ffffff);
 }
+
+/* --- Global Sticky Badge & Snake Slither Animations --- */
+.weddinginvites-sticky-pill {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: rgb(255 238 252 / 85%);
+  border: 1.5px solid rgba(199, 155, 59, 0.4);
+  box-shadow: 0 10px 30px rgba(91, 23, 79, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: auto;
+  animation: sticky-float-pulse 4s infinite ease-in-out;
+}
+
+.weddinginvites-sticky-pill::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(199, 155, 59, 0.25) 0%, transparent 70%);
+  z-index: -1;
+  opacity: 0;
+  animation: sticky-glow-pulse 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Ripple layers */
+.weddinginvites-sticky-pill .sticky-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1.5px solid rgba(199, 155, 59, 0.65);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: sticky-ripple-ani 4s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+.weddinginvites-sticky-pill .sticky-ripple.delay-1 {
+  animation-delay: 2s;
+}
+
+.weddinginvites-sticky-pill:hover {
+  transform: translateX(-50%) scale(1.12);
+  border-color: rgba(199, 155, 59, 0.8);
+  background: rgb(255 238 252 / 95%);
+  box-shadow: 0 15px 40px rgba(199, 155, 59, 0.3), 0 2px 4px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Golden snake slither tracer */
+.sticky-w-snake {
+  stroke-dasharray: 30 70;
+  stroke-dashoffset: 0;
+  animation: snake-slither 2.8s linear infinite;
+}
+
+/* Animations */
+@keyframes sticky-float-pulse {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-6px) scale(1.06);
+    box-shadow: 0 18px 40px rgba(199, 155, 59, 0.3);
+  }
+}
+
+@keyframes sticky-glow-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes sticky-ripple-ani {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+@keyframes snake-slither {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
