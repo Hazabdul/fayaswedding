@@ -7,8 +7,6 @@ import {
   Calendar as CalendarIcon,
   Clock,
   Phone,
-  Volume2,
-  VolumeX,
   Maximize2,
   X,
   ChevronLeft,
@@ -20,7 +18,6 @@ import {
   CheckCircle2,
   Users,
   Gift,
-  Music2,
   Utensils,
   Crown,
   Feather,
@@ -33,7 +30,7 @@ import groomPhoto from "./assets/groom.jpg";
 import bridePhoto from "./assets/bride.jpg";
 import resortPhoto from "./assets/resort.jpg";
 import roomPhoto from "./assets/room.jpeg";
-import weddingMusic from "./assets/soft-wedding-music.m4a";
+
 
 import gallery1 from "./src/assets/images/img5.jpg";
 import gallery2 from "./src/assets/images/img6.jpg";
@@ -46,8 +43,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const MUSIC_FALLBACK_URL =
-  "https://archive.org/download/sitar-instrumental/sitar-instrumental.mp3";
 
 const STYLE_ID = "artist-luxury-wedding-template-styles";
 
@@ -297,14 +292,10 @@ button {
   pointer-events: none;
 }
 
-.language-switcher-pill,
-.music-toggle {
+.language-switcher-pill {
   pointer-events: auto;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-}
-
-.language-switcher-pill {
   display: inline-flex;
   padding: 5px;
   border-radius: 999px;
@@ -329,25 +320,6 @@ button {
   color: #fff;
   background: linear-gradient(135deg, var(--plum), var(--berry));
   box-shadow: 0 10px 24px rgba(91,23,79,0.24);
-}
-
-.music-toggle {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(199,155,59,0.3);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.72);
-  color: var(--plum);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  box-shadow: 0 18px 48px rgba(33,27,32,0.13);
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-
-.music-toggle.playing {
-  background: linear-gradient(135deg, var(--plum), var(--berry));
-  color: #fff;
 }
 
 .luxury-nav {
@@ -2603,11 +2575,11 @@ const WEDDING_DATE = new Date("2026-09-13T16:00:00+05:30");
 export default function KeralaWeddingTemplate() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const audioRef = useRef(null);
+
   const countdownRefs = useRef([]);
 
   const [lang, setLang] = useState("en");
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
   const [rsvpData, setRsvpData] = useState({
@@ -3453,36 +3425,7 @@ export default function KeralaWeddingTemplate() {
     return () => ctx.revert();
   }, [activeCategory]);
 
-  useEffect(() => {
-    return () => {
-      if (!audioRef.current) return;
-      audioRef.current.pause();
-      audioRef.current.src = "";
-    };
-  }, []);
 
-  const togglePlay = async () => {
-    if (!audioRef.current) return;
-
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-      return;
-    }
-
-    try {
-      await audioRef.current.play();
-      setIsPlaying(true);
-    } catch {
-      try {
-        audioRef.current.src = MUSIC_FALLBACK_URL;
-        await audioRef.current.play();
-        setIsPlaying(true);
-      } catch {
-        setIsPlaying(false);
-      }
-    }
-  };
 
 
 
@@ -3656,17 +3599,7 @@ export default function KeralaWeddingTemplate() {
             </button>
           </div>
 
-          <button
-            type="button"
-            className={`music-toggle magnetic ${isPlaying ? "playing" : ""}`}
-            onClick={togglePlay}
-            aria-label="Toggle background music"
-          >
-            {isPlaying ? <Volume2 size={20} /> : <VolumeX size={20} />}
-          </button>
         </div>
-
-        <audio ref={audioRef} src={weddingMusic} loop preload="auto" />
 
         <nav className="luxury-nav" aria-label="Wedding sections">
           <button type="button" onClick={() => scrollToSection("couple")}>
