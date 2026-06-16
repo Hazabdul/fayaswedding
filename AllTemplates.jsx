@@ -4194,7 +4194,7 @@ export default function KeralaWeddingTemplate() {
 
                     <div className="rsvp-mini-card">
                       <div className="rsvp-mini-icon">
-                        <Music2 size={19} />
+                        <Sparkles size={19} />
                       </div>
                       <div>
                         <h4>{lang === "en" ? "Celebration" : "ആഘോഷം"}</h4>
